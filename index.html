@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Skincare Journal</title>
+    <style>
+        :root {
+            --bg-color: #f0f2f5;
+            --card-bg: #ffffff;
+            --primary-text: #2d3436;
+            --accent-sun: #fdcb6e;
+            --accent-moon: #6c5ce7;
+            --checked-color: #b2bec3;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--primary-text);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 500px;
+            width: 100%;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+
+        .section-header {
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 25px 0 10px 5px;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 15px 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: transform 0.2s;
+        }
+
+        .day-label {
+            font-weight: 800;
+            color: var(--accent-moon);
+            display: block;
+            margin-bottom: 10px;
+            border-bottom: 1px dotted #ddd;
+            padding-bottom: 5px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            padding: 12px 0;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+            border-bottom: 1px solid #f1f1f1;
+        }
+
+        li:last-child { border-bottom: none; }
+
+        /* Custom Checkbox Appearance */
+        li::before {
+            content: "";
+            width: 20px;
+            height: 20px;
+            border: 2px solid #dfe6e9;
+            border-radius: 6px;
+            margin-right: 15px;
+            display: inline-block;
+            transition: all 0.2s;
+            flex-shrink: 0;
+        }
+
+        /* State when checked */
+        li.checked {
+            color: var(--checked-color);
+            text-decoration: line-through;
+        }
+
+        li.checked::before {
+            background-color: #55efc4;
+            border-color: #55efc4;
+            content: "✓";
+            color: white;
+            text-align: center;
+            line-height: 20px;
+            font-size: 14px;
+            text-decoration: none !important;
+        }
+
+        .special { font-weight: bold; color: #d63031; }
+        .morning-card { border-top: 5px solid var(--accent-sun); }
+        .night-card { border-top: 5px solid var(--accent-moon); }
+
+        .no-go { color: #fab1a0; font-style: italic; cursor: default; }
+        .no-go::before { content: "✘"; border: none; color: #ff7675; }
+
+        button.reset-btn {
+            background: #dfe6e9;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            margin-top: 20px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h2>Skincare Tracker</h2>
+        <p style="font-size: 0.9rem; color: #636e72;">Tap item untuk tandai selesai</p>
+    </header>
+
+    <div class="section-header">☀️ Pagi (Setiap Hari)</div>
+    <div class="card morning-card">
+        <ul id="pagi-list">
+            <li>Cleanser</li>
+            <li>Toner</li>
+            <li>Moisturizer</li>
+            <li>Sunscreen ☀️</li>
+            <li class="no-go">Serum (No)</li>
+            <li class="no-go">Acid (No)</li>
+        </ul>
+    </div>
+
+    <div class="section-header">🌙 Malam (Mingguan)</div>
+
+    <div class="card night-card">
+        <span class="day-label">SENIN</span>
+        <ul>
+            <li>Micellar</li>
+            <li>Cleanser</li>
+            <li>Toner</li>
+            <li class="special">Serum BHA 2%</li>
+            <li>Moisturizer</li>
+        </ul>
+    </div>
+
+    <div class="card night-card">
+        <span class="day-label">SELASA</span>
+        <ul>
+            <li>Micellar</li>
+            <li>Cleanser</li>
+            <li>Toner</li>
+            <li class="special">Acne spot (totol)</li>
+            <li>Moisturizer</li>
+        </ul>
+    </div>
+
+    <div class="card night-card">
+        <span class="day-label">RABU</span>
+        <ul>
+            <li>Micellar</li>
+            <li>Cleanser</li>
+            <li class="special">Exfoliasi</li>
+            <li>Toner calming</li>
+            <li>Moisturizer</li>
+        </ul>
+    </div>
+
+    <div class="card night-card">
+        <span class="day-label">KAMIS</span>
+        <ul>
+            <li>Micellar</li>
+            <li>Cleanser</li>
+            <li>Toner</li>
+            <li class="special">Serum BHA 2%</li>
+            <li>Moisturizer</li>
+        </ul>
+    </div>
+
+    <div class="card night-card">
+        <span class="day-label">JUMAT</span>
+        <ul>
+            <li>Micellar</li>
+            <li>Cleanser</li>
+            <li class="special">Masker</li>
+            <li>Toner</li>
+            <li>Moisturizer</li>
+        </ul>
+    </div>
+
+    <div class="card night-card">
+        <span class="day-label">SABTU</span>
+        <ul>
+            <li>Micellar</li>
+            <li>Cleanser</li>
+            <li>Toner</li>
+            <li class="special">Acne spot (totol)</li>
+            <li>Moisturizer</li>
+        </ul>
+    </div>
+
+    <div class="card night-card">
+        <span class="day-label">MINGGU</span>
+        <ul>
+            <li>Micellar</li>
+            <li>Cleanser</li>
+            <li class="special">Exfoliasi</li>
+            <li>Toner calming</li>
+            <li>Moisturizer</li>
+        </ul>
+    </div>
+
+    <button class="reset-btn" onclick="resetAll()">Reset Semua Centang</button>
+</div>
+
+<script>
+    // Fitur Klik Centang
+    document.querySelectorAll('li:not(.no-go)').forEach((item, index) => {
+        // Beri ID unik untuk setiap item supaya bisa disimpan
+        const itemId = 'skin-' + index;
+        
+        // Cek data lama di localStorage
+        if(localStorage.getItem(itemId) === 'done') {
+            item.classList.add('checked');
+        }
+
+        item.addEventListener('click', () => {
+            item.classList.toggle('checked');
+            
+            // Simpan status ke memori HP/Browser
+            if(item.classList.contains('checked')) {
+                localStorage.setItem(itemId, 'done');
+            } else {
+                localStorage.removeItem(itemId);
+            }
+        });
+    });
+
+    function resetAll() {
+        if(confirm('Hapus semua centang untuk minggu baru?')) {
+            localStorage.clear();
+            location.reload();
+        }
+    }
+</script>
+
+</body>
+</html>
