@@ -3,135 +3,145 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Skincare Journal</title>
+    <title>Glow Up Planner ✨</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #f0f2f5;
+            --bg: #fdfaf8;
+            --primary: #8e94f2;
+            --secondary: #bbadff;
+            --accent: #ff9a9e;
+            --text: #4a4a4a;
             --card-bg: #ffffff;
-            --primary-text: #2d3436;
-            --accent-sun: #fdcb6e;
-            --accent-moon: #6c5ce7;
-            --checked-color: #b2bec3;
+            --sun: #ffb347;
+            --moon: #6e7ff3;
         }
 
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
         body {
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--primary-text);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
             margin: 0;
             padding: 20px;
             display: flex;
-            flex-direction: column;
-            align-items: center;
+            justify-content: center;
         }
 
-        .container {
-            max-width: 500px;
-            width: 100%;
-        }
+        .container { max-width: 480px; width: 100%; }
 
         header {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 35px;
+            margin-top: 20px;
         }
 
-        h2 {
-            font-size: 1.5rem;
-            margin-bottom: 5px;
+        header h1 {
+            font-weight: 800;
+            font-size: 2rem;
+            margin: 0;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .section-header {
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin: 25px 0 10px 5px;
-            font-size: 1.1rem;
-            text-transform: uppercase;
+        .by-naila {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--primary);
             letter-spacing: 1px;
+            margin-top: 5px;
+            display: block;
+            text-transform: uppercase;
         }
+
+        .quote {
+            font-size: 0.9rem;
+            font-style: italic;
+            opacity: 0.6;
+            margin-top: 10px;
+        }
+
+        .section-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #fff;
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-weight: 800;
+            font-size: 0.8rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+            margin-bottom: 15px;
+            margin-top: 20px;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .morning-tag { color: var(--sun); }
+        .night-tag { color: var(--moon); }
 
         .card {
             background: var(--card-bg);
-            border-radius: 15px;
-            padding: 15px 20px;
-            margin-bottom: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            transition: transform 0.2s;
+            border-radius: 24px;
+            padding: 24px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+            border: 1px solid rgba(255,255,255,0.8);
+            position: relative;
         }
 
-        .day-label {
+        .day-title {
             font-weight: 800;
-            color: var(--accent-moon);
+            font-size: 1.1rem;
+            color: var(--primary);
+            margin-bottom: 5px;
             display: block;
-            margin-bottom: 10px;
-            border-bottom: 1px dotted #ddd;
-            padding-bottom: 5px;
         }
 
-        ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
+        .time-est {
+            font-size: 0.7rem;
+            color: #bbb;
+            margin-bottom: 15px;
+            display: block;
         }
+
+        ul { list-style: none; padding: 0; margin: 0; }
 
         li {
-            padding: 12px 0;
+            padding: 14px 16px;
+            margin-bottom: 8px;
+            border-radius: 16px;
+            background: #fcfcfd;
             display: flex;
             align-items: center;
+            transition: 0.3s;
             cursor: pointer;
-            user-select: none;
-            border-bottom: 1px solid #f1f1f1;
         }
 
-        li:last-child { border-bottom: none; }
-
-        /* Custom Checkbox Appearance */
-        li::before {
-            content: "";
-            width: 20px;
-            height: 20px;
-            border: 2px solid #dfe6e9;
-            border-radius: 6px;
+        .check-circle {
+            width: 22px; height: 22px;
+            border: 2px solid #e0e0e0;
+            border-radius: 50%;
             margin-right: 15px;
-            display: inline-block;
-            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             flex-shrink: 0;
         }
 
-        /* State when checked */
-        li.checked {
-            color: var(--checked-color);
-            text-decoration: line-through;
-        }
+        li.checked { background: #f1f2ff; opacity: 0.7; }
+        li.checked .check-circle { background: var(--primary); border-color: var(--primary); }
+        li.checked .check-circle::after { content: '✓'; color: white; font-size: 12px; }
+        li.checked span { text-decoration: line-through; }
 
-        li.checked::before {
-            background-color: #55efc4;
-            border-color: #55efc4;
-            content: "✓";
-            color: white;
-            text-align: center;
-            line-height: 20px;
-            font-size: 14px;
-            text-decoration: none !important;
-        }
+        .special-item { color: #d63031; font-weight: 600; }
+        .no-go { opacity: 0.5; cursor: not-allowed; background: #fff0f0; }
 
-        .special { font-weight: bold; color: #d63031; }
-        .morning-card { border-top: 5px solid var(--accent-sun); }
-        .night-card { border-top: 5px solid var(--accent-moon); }
-
-        .no-go { color: #fab1a0; font-style: italic; cursor: default; }
-        .no-go::before { content: "✘"; border: none; color: #ff7675; }
-
-        button.reset-btn {
-            background: #dfe6e9;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 20px;
-            margin-top: 20px;
-            cursor: pointer;
-            width: 100%;
-            font-weight: bold;
+        .btn-reset {
+            width: 100%; padding: 16px; border-radius: 16px; border: none;
+            background: #eee; color: #888; font-weight: 700; cursor: pointer;
+            margin-top: 30px; margin-bottom: 50px;
         }
     </style>
 </head>
@@ -139,134 +149,74 @@
 
 <div class="container">
     <header>
-        <h2>Skincare Tracker</h2>
-        <p style="font-size: 0.9rem; color: #636e72;">Tap item untuk tandai selesai</p>
+        <h1>Glow Up Planner ✨</h1>
+        <span class="by-naila">By Naila</span>
+        <p class="quote">"Investasi terbaik adalah merawat diri sendiri."</p>
     </header>
 
-    <div class="section-header">☀️ Pagi (Setiap Hari)</div>
-    <div class="card morning-card">
-        <ul id="pagi-list">
-            <li>Cleanser</li>
-            <li>Toner</li>
-            <li>Moisturizer</li>
-            <li>Sunscreen ☀️</li>
-            <li class="no-go">Serum (No)</li>
-            <li class="no-go">Acid (No)</li>
-        </ul>
-    </div>
-
-    <div class="section-header">🌙 Malam (Mingguan)</div>
-
-    <div class="card night-card">
-        <span class="day-label">SENIN</span>
+    <div class="section-tag morning-tag">☀️ PAGI (SETIAP HARI)</div>
+    <div class="card">
+        <span class="time-est">⏱️ Estimasi: 5 Menit</span>
         <ul>
-            <li>Micellar</li>
-            <li>Cleanser</li>
-            <li>Toner</li>
-            <li class="special">Serum BHA 2%</li>
-            <li>Moisturizer</li>
+            <li><div class="check-circle"></div><span>Cleanser</span></li>
+            <li><div class="check-circle"></div><span>Toner</span></li>
+            <li><div class="check-circle"></div><span>Moisturizer</span></li>
+            <li><div class="check-circle"></div><span>Sunscreen ☀️</span></li>
+            <li class="no-go">❌ Serum (No)</li>
+            <li class="no-go">❌ Acid (No)</li>
         </ul>
     </div>
 
-    <div class="card night-card">
-        <span class="day-label">SELASA</span>
-        <ul>
-            <li>Micellar</li>
-            <li>Cleanser</li>
-            <li>Toner</li>
-            <li class="special">Acne spot (totol)</li>
-            <li>Moisturizer</li>
-        </ul>
-    </div>
+    <div class="section-tag night-tag">🌙 MALAM (CHART)</div>
 
-    <div class="card night-card">
-        <span class="day-label">RABU</span>
-        <ul>
-            <li>Micellar</li>
-            <li>Cleanser</li>
-            <li class="special">Exfoliasi</li>
-            <li>Toner calming</li>
-            <li>Moisturizer</li>
-        </ul>
-    </div>
+    <script>
+        const schedule = [
+            { day: "SENIN", est: "8 Menit", items: ["Micellar", "Cleanser", "Toner", {text: "Serum BHA 2%", sp: true}, "Moisturizer"] },
+            { day: "SELASA", est: "7 Menit", items: ["Micellar", "Cleanser", "Toner", {text: "Acne spot (totol)", sp: true}, "Moisturizer"] },
+            { day: "RABU", est: "10 Menit", items: ["Micellar", "Cleanser", {text: "Exfoliasi", sp: true}, "Toner calming", "Moisturizer"] },
+            { day: "KAMIS", est: "8 Menit", items: ["Micellar", "Cleanser", "Toner", {text: "Serum BHA 2%", sp: true}, "Moisturizer"] },
+            { day: "JUMAT", est: "20 Menit", items: ["Micellar", "Cleanser", {text: "Masker", sp: true}, "Toner", "Moisturizer"] },
+            { day: "SABTU", est: "7 Menit", items: ["Micellar", "Cleanser", "Toner", {text: "Acne spot (totol)", sp: true}, "Moisturizer"] },
+            { day: "MINGGU", est: "10 Menit", items: ["Micellar", "Cleanser", {text: "Exfoliasi", sp: true}, "Toner calming", "Moisturizer"] }
+        ];
 
-    <div class="card night-card">
-        <span class="day-label">KAMIS</span>
-        <ul>
-            <li>Micellar</li>
-            <li>Cleanser</li>
-            <li>Toner</li>
-            <li class="special">Serum BHA 2%</li>
-            <li>Moisturizer</li>
-        </ul>
-    </div>
+        const container = document.querySelector('.container');
+        schedule.forEach((data, dIdx) => {
+            const card = document.createElement('div');
+            card.className = 'card';
+            let itemsHtml = data.items.map((it, iIdx) => {
+                const txt = typeof it === 'string' ? it : it.text;
+                const sp = it.sp ? 'special-item' : '';
+                return `<li data-id="n-${dIdx}-${iIdx}"><div class="check-circle"></div><span class="${sp}">${txt}</span></li>`;
+            }).join('');
+            card.innerHTML = `<span class="day-title">${data.day}</span><span class="time-est">⏱️ Est: ${data.est}</span><ul>${itemsHtml}</ul>`;
+            container.appendChild(card);
+        });
+    </script>
 
-    <div class="card night-card">
-        <span class="day-label">JUMAT</span>
-        <ul>
-            <li>Micellar</li>
-            <li>Cleanser</li>
-            <li class="special">Masker</li>
-            <li>Toner</li>
-            <li>Moisturizer</li>
-        </ul>
-    </div>
-
-    <div class="card night-card">
-        <span class="day-label">SABTU</span>
-        <ul>
-            <li>Micellar</li>
-            <li>Cleanser</li>
-            <li>Toner</li>
-            <li class="special">Acne spot (totol)</li>
-            <li>Moisturizer</li>
-        </ul>
-    </div>
-
-    <div class="card night-card">
-        <span class="day-label">MINGGU</span>
-        <ul>
-            <li>Micellar</li>
-            <li>Cleanser</li>
-            <li class="special">Exfoliasi</li>
-            <li>Toner calming</li>
-            <li>Moisturizer</li>
-        </ul>
-    </div>
-
-    <button class="reset-btn" onclick="resetAll()">Reset Semua Centang</button>
+    <button class="btn-reset" onclick="resetApp()">Reset All Progress</button>
 </div>
 
 <script>
-    // Fitur Klik Centang
-    document.querySelectorAll('li:not(.no-go)').forEach((item, index) => {
-        // Beri ID unik untuk setiap item supaya bisa disimpan
-        const itemId = 'skin-' + index;
-        
-        // Cek data lama di localStorage
-        if(localStorage.getItem(itemId) === 'done') {
-            item.classList.add('checked');
+    document.addEventListener('click', (e) => {
+        const li = e.target.closest('li');
+        if (li && !li.classList.contains('no-go')) {
+            li.classList.toggle('checked');
+            const id = li.getAttribute('data-id');
+            li.classList.contains('checked') ? localStorage.setItem(id, 'done') : localStorage.removeItem(id);
         }
-
-        item.addEventListener('click', () => {
-            item.classList.toggle('checked');
-            
-            // Simpan status ke memori HP/Browser
-            if(item.classList.contains('checked')) {
-                localStorage.setItem(itemId, 'done');
-            } else {
-                localStorage.removeItem(itemId);
-            }
-        });
     });
 
-    function resetAll() {
-        if(confirm('Hapus semua centang untuk minggu baru?')) {
-            localStorage.clear();
-            location.reload();
-        }
+    window.onload = () => {
+        document.querySelectorAll('li').forEach(li => {
+            const id = li.getAttribute('data-id');
+            if (localStorage.getItem(id) === 'done') li.classList.add('checked');
+        });
+    };
+
+    function resetApp() {
+        if(confirm('Reset semua progress Naila?')) { localStorage.clear(); location.reload(); }
     }
 </script>
-
 </body>
 </html>
