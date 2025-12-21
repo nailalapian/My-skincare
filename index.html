@@ -3,145 +3,119 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Glow Up Planner ✨</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <title>Naila's Glow Up Planner ✨</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #fdfaf8;
             --primary: #8e94f2;
-            --secondary: #bbadff;
             --accent: #ff9a9e;
-            --text: #4a4a4a;
-            --card-bg: #ffffff;
-            --sun: #ffb347;
-            --moon: #6e7ff3;
+            --bg: #f8f9fd;
+            --text-main: #2d3436;
+            --glass: rgba(255, 255, 255, 0.85);
         }
 
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: var(--bg);
-            color: var(--text);
+            background: linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%);
+            background-attachment: fixed;
+            color: var(--text-main);
             margin: 0;
-            padding: 20px;
+            padding: 15px;
             display: flex;
             justify-content: center;
         }
 
-        .container { max-width: 480px; width: 100%; }
+        .container { max-width: 450px; width: 100%; }
 
         header {
             text-align: center;
-            margin-bottom: 35px;
-            margin-top: 20px;
+            padding: 30px 20px;
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            border-radius: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            border: 1px solid rgba(255,255,255,0.5);
         }
 
         header h1 {
-            font-weight: 800;
-            font-size: 2rem;
-            margin: 0;
-            background: linear-gradient(45deg, var(--primary), var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            font-weight: 800; font-size: 1.6rem; margin: 0;
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
 
-        .by-naila {
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: var(--primary);
-            letter-spacing: 1px;
-            margin-top: 5px;
-            display: block;
-            text-transform: uppercase;
-        }
+        .by-naila { font-size: 0.7rem; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: 2px; margin-top: 5px; display: block; }
 
-        .quote {
-            font-size: 0.9rem;
-            font-style: italic;
-            opacity: 0.6;
-            margin-top: 10px;
-        }
-
-        .section-tag {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: #fff;
-            padding: 8px 16px;
-            border-radius: 50px;
-            font-weight: 800;
-            font-size: 0.8rem;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
-            margin-bottom: 15px;
-            margin-top: 20px;
-            border: 1px solid rgba(0,0,0,0.05);
-        }
-
-        .morning-tag { color: var(--sun); }
-        .night-tag { color: var(--moon); }
-
-        .card {
-            background: var(--card-bg);
-            border-radius: 24px;
-            padding: 24px;
+        /* Stats Section */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
             margin-bottom: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.04);
-            border: 1px solid rgba(255,255,255,0.8);
-            position: relative;
         }
 
-        .day-title {
-            font-weight: 800;
-            font-size: 1.1rem;
-            color: var(--primary);
-            margin-bottom: 5px;
-            display: block;
+        .stat-card {
+            background: var(--glass);
+            padding: 15px;
+            border-radius: 20px;
+            text-align: center;
+            border: 1px solid white;
         }
 
-        .time-est {
-            font-size: 0.7rem;
-            color: #bbb;
-            margin-bottom: 15px;
-            display: block;
+        .stat-value { font-size: 1.2rem; font-weight: 800; color: var(--primary); display: block; }
+        .stat-label { font-size: 0.65rem; font-weight: 600; color: #95a5a6; text-transform: uppercase; }
+
+        /* Progress Bar */
+        .progress-box { margin-top: 15px; }
+        .progress-bg { background: #eee; height: 10px; border-radius: 10px; overflow: hidden; }
+        #progress-bar { width: 0%; height: 100%; background: linear-gradient(90deg, var(--primary), var(--accent)); transition: 0.5s; }
+
+        /* Month Tracker */
+        .month-card {
+            background: #2d3436;
+            color: white;
+            padding: 20px;
+            border-radius: 25px;
+            margin-bottom: 25px;
         }
 
-        ul { list-style: none; padding: 0; margin: 0; }
-
-        li {
-            padding: 14px 16px;
-            margin-bottom: 8px;
-            border-radius: 16px;
-            background: #fcfcfd;
-            display: flex;
-            align-items: center;
+        .month-title { font-weight: 700; font-size: 0.9rem; margin-bottom: 15px; display: block; }
+        .weeks-row { display: flex; justify-content: space-between; }
+        .week-dot {
+            width: 50px; text-align: center; font-size: 0.6rem; opacity: 0.5;
             transition: 0.3s;
-            cursor: pointer;
         }
+        .week-dot.active { opacity: 1; color: var(--accent); font-weight: 800; }
+        .star { font-size: 1.2rem; display: block; margin-bottom: 5px; filter: grayscale(1); }
+        .week-dot.active .star { filter: grayscale(0); }
 
-        .check-circle {
-            width: 22px; height: 22px;
-            border: 2px solid #e0e0e0;
-            border-radius: 50%;
-            margin-right: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
+        /* Card System */
+        .section-tag { font-weight: 800; font-size: 0.7rem; color: #7f8c8d; margin: 15px 0 10px 5px; display: block; }
+        .card { background: var(--glass); border-radius: 25px; padding: 20px; margin-bottom: 15px; border: 1px solid white; }
+        .day-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+        .day-name { font-weight: 800; color: #2d3436; }
+        
+        ul { list-style: none; padding: 0; margin: 0; }
+        li {
+            padding: 12px 15px; margin-bottom: 8px; border-radius: 15px;
+            background: rgba(255,255,255,0.5); cursor: pointer; transition: 0.2s;
         }
+        .item-row { display: flex; align-items: center; }
+        .checkbox { width: 20px; height: 20px; border: 2px solid #ddd; border-radius: 6px; margin-right: 12px; transition: 0.2s; flex-shrink: 0; }
+        
+        li.checked { background: #f0f3ff; opacity: 0.8; }
+        li.checked .checkbox { background: var(--primary); border-color: var(--primary); }
+        li.checked .checkbox::after { content: '✓'; color: white; display: block; text-align: center; font-size: 12px; line-height: 18px; }
+        li.checked span { text-decoration: line-through; color: #95a5a6; }
 
-        li.checked { background: #f1f2ff; opacity: 0.7; }
-        li.checked .check-circle { background: var(--primary); border-color: var(--primary); }
-        li.checked .check-circle::after { content: '✓'; color: white; font-size: 12px; }
-        li.checked span { text-decoration: line-through; }
-
-        .special-item { color: #d63031; font-weight: 600; }
-        .no-go { opacity: 0.5; cursor: not-allowed; background: #fff0f0; }
+        .note { font-size: 0.7rem; color: #95a5a6; margin-left: 32px; display: block; }
+        .special { color: #eb4d4b; font-weight: 600; }
 
         .btn-reset {
-            width: 100%; padding: 16px; border-radius: 16px; border: none;
-            background: #eee; color: #888; font-weight: 700; cursor: pointer;
-            margin-top: 30px; margin-bottom: 50px;
+            width: 100%; padding: 18px; border-radius: 20px; border: none;
+            background: #2d3436; color: white; font-weight: 700; margin: 30px 0 60px;
         }
     </style>
 </head>
@@ -150,72 +124,147 @@
 <div class="container">
     <header>
         <h1>Glow Up Planner ✨</h1>
-        <span class="by-naila">By Naila</span>
-        <p class="quote">"Investasi terbaik adalah merawat diri sendiri."</p>
+        <span class="by-naila">Naila's Exclusive Journal</span>
+        
+        <div class="progress-box">
+            <div class="progress-bg"><div id="progress-bar"></div></div>
+            <div style="font-size: 0.7rem; margin-top: 8px; font-weight: 700;">Hari ini: <span id="progress-percent">0%</span> Done</div>
+        </div>
     </header>
 
-    <div class="section-tag morning-tag">☀️ PAGI (SETIAP HARI)</div>
+    <div class="stats-grid">
+        <div class="stat-card">
+            <span class="stat-value" id="streak-count">0</span>
+            <span class="stat-label">🔥 Day Streak</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-value" id="total-done">0</span>
+            <span class="stat-label">⭐ Total Glow</span>
+        </div>
+    </div>
+
+    <div class="month-card">
+        <span class="month-title">Pencapaian Sebulan 🌙</span>
+        <div class="weeks-row">
+            <div class="week-dot" id="w1"><span class="star">⭐</span>MGG 1</div>
+            <div class="week-dot" id="w2"><span class="star">⭐</span>MGG 2</div>
+            <div class="week-dot" id="w3"><span class="star">⭐</span>MGG 3</div>
+            <div class="week-dot" id="w4"><span class="star">⭐</span>MGG 4</div>
+        </div>
+    </div>
+
+    <span class="section-tag">MORNING ROUTINE</span>
     <div class="card">
-        <span class="time-est">⏱️ Estimasi: 5 Menit</span>
-        <ul>
-            <li><div class="check-circle"></div><span>Cleanser</span></li>
-            <li><div class="check-circle"></div><span>Toner</span></li>
-            <li><div class="check-circle"></div><span>Moisturizer</span></li>
-            <li><div class="check-circle"></div><span>Sunscreen ☀️</span></li>
-            <li class="no-go">❌ Serum (No)</li>
-            <li class="no-go">❌ Acid (No)</li>
+        <div class="day-header"><span class="day-name">Pagi (Daily)</span></div>
+        <ul id="pagi-list">
+            <li class="task">
+                <div class="item-row"><div class="checkbox"></div><span>Cleanser</span></div>
+            </li>
+            <li class="task">
+                <div class="item-row"><div class="checkbox"></div><span>Toner</span></div>
+            </li>
+            <li class="task">
+                <div class="item-row"><div class="checkbox"></div><span>Moisturizer</span></div>
+            </li>
+            <li class="task">
+                <div class="item-row"><div class="checkbox"></div><span>Sunscreen ☀️</span></div>
+            </li>
         </ul>
     </div>
 
-    <div class="section-tag night-tag">🌙 MALAM (CHART)</div>
+    <span class="section-tag">NIGHT ROUTINE</span>
+    <div id="night-cards"></div>
 
-    <script>
-        const schedule = [
-            { day: "SENIN", est: "8 Menit", items: ["Micellar", "Cleanser", "Toner", {text: "Serum BHA 2%", sp: true}, "Moisturizer"] },
-            { day: "SELASA", est: "7 Menit", items: ["Micellar", "Cleanser", "Toner", {text: "Acne spot (totol)", sp: true}, "Moisturizer"] },
-            { day: "RABU", est: "10 Menit", items: ["Micellar", "Cleanser", {text: "Exfoliasi", sp: true}, "Toner calming", "Moisturizer"] },
-            { day: "KAMIS", est: "8 Menit", items: ["Micellar", "Cleanser", "Toner", {text: "Serum BHA 2%", sp: true}, "Moisturizer"] },
-            { day: "JUMAT", est: "20 Menit", items: ["Micellar", "Cleanser", {text: "Masker", sp: true}, "Toner", "Moisturizer"] },
-            { day: "SABTU", est: "7 Menit", items: ["Micellar", "Cleanser", "Toner", {text: "Acne spot (totol)", sp: true}, "Moisturizer"] },
-            { day: "MINGGU", est: "10 Menit", items: ["Micellar", "Cleanser", {text: "Exfoliasi", sp: true}, "Toner calming", "Moisturizer"] }
-        ];
-
-        const container = document.querySelector('.container');
-        schedule.forEach((data, dIdx) => {
-            const card = document.createElement('div');
-            card.className = 'card';
-            let itemsHtml = data.items.map((it, iIdx) => {
-                const txt = typeof it === 'string' ? it : it.text;
-                const sp = it.sp ? 'special-item' : '';
-                return `<li data-id="n-${dIdx}-${iIdx}"><div class="check-circle"></div><span class="${sp}">${txt}</span></li>`;
-            }).join('');
-            card.innerHTML = `<span class="day-title">${data.day}</span><span class="time-est">⏱️ Est: ${data.est}</span><ul>${itemsHtml}</ul>`;
-            container.appendChild(card);
-        });
-    </script>
-
-    <button class="btn-reset" onclick="resetApp()">Reset All Progress</button>
+    <button class="btn-reset" onclick="resetApp()">Reset Progres & Mulai Baru</button>
 </div>
 
 <script>
+    const schedule = [
+        { d: "SENIN", items: ["Micellar", "Cleanser", "Toner", {n: "Serum BHA 2%", s:1}, "Moisturizer"] },
+        { d: "SELASA", items: ["Micellar", "Cleanser", "Toner", {n: "Acne spot", s:1, c: "Tunggu kering"}, "Moisturizer"] },
+        { d: "RABU", items: ["Micellar", "Cleanser", {n: "Exfoliasi", s:1, c: "1-5 Menit"}, "Toner calming", "Moisturizer"] },
+        { d: "KAMIS", items: ["Micellar", "Cleanser", "Toner", {n: "Serum BHA 2%", s:1}, "Moisturizer"] },
+        { d: "JUMAT", items: ["Micellar", "Cleanser", {n: "Masker", s:1, c: "10-15 Menit"}, "Toner", "Moisturizer"] },
+        { d: "SABTU", items: ["Micellar", "Cleanser", "Toner", {n: "Acne spot", s:1, c: "Tunggu kering"}, "Moisturizer"] },
+        { d: "MINGGU", items: ["Micellar", "Cleanser", {n: "Exfoliasi", s:1, c: "1-5 Menit"}, "Toner calming", "Moisturizer"] }
+    ];
+
+    const nightContainer = document.getElementById('night-cards');
+    schedule.forEach((day, dIdx) => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        let itemsHtml = day.items.map((it, iIdx) => {
+            const name = typeof it === 'string' ? it : it.n;
+            const isSp = it.s ? 'special' : '';
+            const note = it.c ? `<span class="note">${it.c}</span>` : '';
+            return `<li class="task" data-id="v4-${dIdx}-${iIdx}">
+                        <div class="item-row"><div class="checkbox"></div><span class="${isSp}">${name}</span></div>
+                        ${note}
+                    </li>`;
+        }).join('');
+        card.innerHTML = `<div class="day-header"><span class="day-name">${day.d}</span></div><ul>${itemsHtml}</ul>`;
+        nightContainer.appendChild(card);
+    });
+
+    function updateStats() {
+        const all = document.querySelectorAll('.task').length;
+        const done = document.querySelectorAll('.task.checked').length;
+        const percent = Math.round((done / all) * 100);
+        
+        document.getElementById('progress-bar').style.width = percent + '%';
+        document.getElementById('progress-percent').innerText = percent + '%';
+
+        // Hitung Total yang sudah diceklis selamanya
+        let totalAllTime = parseInt(localStorage.getItem('total_glow') || 0);
+        document.getElementById('total-done').innerText = totalAllTime + done;
+
+        // Logic sederhana sebulan (tiap 25% total progress dianggap 1 minggu selesai)
+        if (percent > 20) document.getElementById('w1').classList.add('active');
+        if (percent > 45) document.getElementById('w2').classList.add('active');
+        if (percent > 75) document.getElementById('w3').classList.add('active');
+        if (percent === 100) document.getElementById('w4').classList.add('active');
+    }
+
     document.addEventListener('click', (e) => {
-        const li = e.target.closest('li');
-        if (li && !li.classList.contains('no-go')) {
+        const li = e.target.closest('.task');
+        if (li) {
             li.classList.toggle('checked');
             const id = li.getAttribute('data-id');
             li.classList.contains('checked') ? localStorage.setItem(id, 'done') : localStorage.removeItem(id);
+            updateStats();
         }
     });
 
+    // Simulasi Streak & Loading
     window.onload = () => {
-        document.querySelectorAll('li').forEach(li => {
+        document.querySelectorAll('.task').forEach(li => {
             const id = li.getAttribute('data-id');
             if (localStorage.getItem(id) === 'done') li.classList.add('checked');
         });
+
+        // Simpan streak (simulasi sederhana)
+        let streak = localStorage.getItem('naila_streak') || 0;
+        document.getElementById('streak-count').innerText = streak;
+        
+        updateStats();
     };
 
     function resetApp() {
-        if(confirm('Reset semua progress Naila?')) { localStorage.clear(); location.reload(); }
+        if(confirm('Naila, mau reset progres mingguan? Ini akan menambah record sebulanmu!')) {
+            // Sebelum hapus, tambahkan ke total all time
+            let currentDone = document.querySelectorAll('.task.checked').length;
+            let oldTotal = parseInt(localStorage.getItem('total_glow') || 0);
+            localStorage.setItem('total_glow', oldTotal + currentDone);
+            
+            // Tambah streak
+            let streak = parseInt(localStorage.getItem('naila_streak') || 0);
+            localStorage.setItem('naila_streak', streak + 1);
+
+            // Bersihkan harian
+            const tasks = document.querySelectorAll('.task');
+            tasks.forEach(t => localStorage.removeItem(t.getAttribute('data-id')));
+            location.reload();
+        }
     }
 </script>
 </body>
