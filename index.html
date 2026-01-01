@@ -48,7 +48,6 @@
 
         .by-naila { font-size: 0.7rem; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: 2px; margin-top: 5px; display: block; }
 
-        /* Stats Section */
         .stats-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -67,12 +66,10 @@
         .stat-value { font-size: 1.2rem; font-weight: 800; color: var(--primary); display: block; }
         .stat-label { font-size: 0.65rem; font-weight: 600; color: #95a5a6; text-transform: uppercase; }
 
-        /* Progress Bar */
         .progress-box { margin-top: 15px; }
         .progress-bg { background: #eee; height: 10px; border-radius: 10px; overflow: hidden; }
         #progress-bar { width: 0%; height: 100%; background: linear-gradient(90deg, var(--primary), var(--accent)); transition: 0.5s; }
 
-        /* Month Tracker */
         .month-card {
             background: #2d3436;
             color: white;
@@ -91,7 +88,6 @@
         .star { font-size: 1.2rem; display: block; margin-bottom: 5px; filter: grayscale(1); }
         .week-dot.active .star { filter: grayscale(0); }
 
-        /* Card System */
         .section-tag { font-weight: 800; font-size: 0.7rem; color: #7f8c8d; margin: 15px 0 10px 5px; display: block; }
         .card { background: var(--glass); border-radius: 25px; padding: 20px; margin-bottom: 15px; border: 1px solid white; }
         .day-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
@@ -157,16 +153,19 @@
     <div class="card">
         <div class="day-header"><span class="day-name">Pagi (Daily)</span></div>
         <ul id="pagi-list">
-            <li class="task">
+            <li class="task" data-id="am-1">
                 <div class="item-row"><div class="checkbox"></div><span>Cleanser</span></div>
             </li>
-            <li class="task">
+            <li class="task" data-id="am-2">
                 <div class="item-row"><div class="checkbox"></div><span>Toner</span></div>
             </li>
-            <li class="task">
+            <li class="task" data-id="am-v-3">
+                <div class="item-row"><div class="checkbox"></div><span class="special">Vitamin C Serum</span></div>
+            </li>
+            <li class="task" data-id="am-3">
                 <div class="item-row"><div class="checkbox"></div><span>Moisturizer</span></div>
             </li>
-            <li class="task">
+            <li class="task" data-id="am-4">
                 <div class="item-row"><div class="checkbox"></div><span>Sunscreen ☀️</span></div>
             </li>
         </ul>
@@ -179,14 +178,15 @@
 </div>
 
 <script>
+    // Jadwal yang diperbarui sesuai anjuran kedokteran kulit (Medical-Friendly)
     const schedule = [
-        { d: "SENIN", items: ["Micellar", "Cleanser", "Toner", {n: "Serum BHA 2%", s:1}, "Moisturizer"] },
-        { d: "SELASA", items: ["Micellar", "Cleanser", "Toner", {n: "Acne spot", s:1, c: "Tunggu kering"}, "Moisturizer"] },
-        { d: "RABU", items: ["Micellar", "Cleanser", {n: "Exfoliasi", s:1, c: "1-5 Menit"}, "Toner calming", "Moisturizer"] },
-        { d: "KAMIS", items: ["Micellar", "Cleanser", "Toner", {n: "Serum BHA 2%", s:1}, "Moisturizer"] },
-        { d: "JUMAT", items: ["Micellar", "Cleanser", {n: "Masker", s:1, c: "10-15 Menit"}, "Toner", "Moisturizer"] },
-        { d: "SABTU", items: ["Micellar", "Cleanser", "Toner", {n: "Acne spot", s:1, c: "Tunggu kering"}, "Moisturizer"] },
-        { d: "MINGGU", items: ["Micellar", "Cleanser", {n: "Exfoliasi", s:1, c: "1-5 Menit"}, "Toner calming", "Moisturizer"] }
+        { d: "SENIN", items: ["Micellar", "Cleanser", "Toner", {n: "Serum BHA 2%", s:1}, {n: "5X Ceramide Serum", s:1}, "Moisturizer"] },
+        { d: "SELASA", items: ["Micellar", "Cleanser", "Toner", {n: "5X Ceramide Serum", s:1}, "Moisturizer", {n: "Acne spot", s:1, c: "Tunggu kering"}] },
+        { d: "RABU", items: ["Micellar", "Cleanser", {n: "Exfoliasi", s:1, c: "1-5 Menit"}, "Toner calming", {n: "5X Ceramide Serum", s:1}, "Moisturizer"] },
+        { d: "KAMIS", items: ["Micellar", "Cleanser", "Toner", {n: "Serum BHA 2%", s:1}, {n: "5X Ceramide Serum", s:1}, "Moisturizer"] },
+        { d: "JUMAT", items: ["Micellar", "Cleanser", {n: "Masker", s:1, c: "10-15 Menit"}, "Toner", {n: "5X Ceramide Serum", s:1}, "Moisturizer"] },
+        { d: "SABTU", items: ["Micellar", "Cleanser", "Toner", {n: "5X Ceramide Serum", s:1}, "Moisturizer", {n: "Acne spot", s:1, c: "Tunggu kering"}] },
+        { d: "MINGGU", items: ["Micellar", "Cleanser", {n: "Exfoliasi", s:1, c: "1-5 Menit"}, "Toner calming", {n: "5X Ceramide Serum", s:1}, "Moisturizer"] }
     ];
 
     const nightContainer = document.getElementById('night-cards');
@@ -197,7 +197,7 @@
             const name = typeof it === 'string' ? it : it.n;
             const isSp = it.s ? 'special' : '';
             const note = it.c ? `<span class="note">${it.c}</span>` : '';
-            return `<li class="task" data-id="v4-${dIdx}-${iIdx}">
+            return `<li class="task" data-id="v7-${dIdx}-${iIdx}">
                         <div class="item-row"><div class="checkbox"></div><span class="${isSp}">${name}</span></div>
                         ${note}
                     </li>`;
@@ -214,11 +214,9 @@
         document.getElementById('progress-bar').style.width = percent + '%';
         document.getElementById('progress-percent').innerText = percent + '%';
 
-        // Hitung Total yang sudah diceklis selamanya
         let totalAllTime = parseInt(localStorage.getItem('total_glow') || 0);
         document.getElementById('total-done').innerText = totalAllTime + done;
 
-        // Logic sederhana sebulan (tiap 25% total progress dianggap 1 minggu selesai)
         if (percent > 20) document.getElementById('w1').classList.add('active');
         if (percent > 45) document.getElementById('w2').classList.add('active');
         if (percent > 75) document.getElementById('w3').classList.add('active');
@@ -235,14 +233,12 @@
         }
     });
 
-    // Simulasi Streak & Loading
     window.onload = () => {
         document.querySelectorAll('.task').forEach(li => {
             const id = li.getAttribute('data-id');
             if (localStorage.getItem(id) === 'done') li.classList.add('checked');
         });
 
-        // Simpan streak (simulasi sederhana)
         let streak = localStorage.getItem('naila_streak') || 0;
         document.getElementById('streak-count').innerText = streak;
         
@@ -251,16 +247,13 @@
 
     function resetApp() {
         if(confirm('Naila, mau reset progres mingguan? Ini akan menambah record sebulanmu!')) {
-            // Sebelum hapus, tambahkan ke total all time
             let currentDone = document.querySelectorAll('.task.checked').length;
             let oldTotal = parseInt(localStorage.getItem('total_glow') || 0);
             localStorage.setItem('total_glow', oldTotal + currentDone);
             
-            // Tambah streak
             let streak = parseInt(localStorage.getItem('naila_streak') || 0);
             localStorage.setItem('naila_streak', streak + 1);
 
-            // Bersihkan harian
             const tasks = document.querySelectorAll('.task');
             tasks.forEach(t => localStorage.removeItem(t.getAttribute('data-id')));
             location.reload();
