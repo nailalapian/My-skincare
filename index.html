@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Naila's Ultimate Glow ✨</title>
+    <title>Naila's Absolute Glow ✨</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <style>
@@ -11,16 +11,30 @@
             --primary: #8e94f2;
             --accent: #ff9a9e;
             --water: #70a1ff;
-            --glass: rgba(255, 255, 255, 0.9);
-            --dark: #2d3436;
+            --bg: #f8f9fd;
+            --card-bg: rgba(255, 255, 255, 0.9);
+            --text-main: #2d3436;
+            --glass: rgba(255, 255, 255, 0.85);
         }
 
-        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; scroll-behavior: smooth; }
+        body.dark-mode {
+            --bg: #1a1a2e;
+            --card-bg: rgba(30, 30, 50, 0.9);
+            --text-main: #e0e0e0;
+            --glass: rgba(30, 30, 50, 0.85);
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        }
+
+        /* Aesthetic Night Finish */
+        body.all-done { background: linear-gradient(135deg, #2c3e50, #000000) !important; }
+
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; scroll-behavior: smooth; transition: 0.3s; }
 
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
             background: linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%);
             background-attachment: fixed;
+            color: var(--text-main);
             margin: 0; padding: 15px; display: flex; justify-content: center;
         }
 
@@ -40,18 +54,37 @@
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
 
+        .dark-toggle { position: fixed; top: 20px; right: 20px; z-index: 1000; cursor: pointer; font-size: 1.5rem; background: none; border: none; }
+
+        /* Next Step & Weather Widgets */
+        .smart-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; }
+        .info-box { background: var(--glass); padding: 12px; border-radius: 20px; border: 1px solid white; font-size: 0.7rem; }
+        .info-box b { display: block; color: var(--primary); text-transform: uppercase; margin-bottom: 4px; letter-spacing: 0.5px; }
+
         .progress-box { margin-top: 20px; }
         .progress-bg { background: #eee; height: 12px; border-radius: 10px; overflow: hidden; }
-        #progress-bar { width: 0%; height: 100%; background: linear-gradient(90deg, var(--primary), var(--accent)); transition: 0.8s cubic-bezier(0.1, 0.7, 1.0, 0.1); }
+        #progress-bar { width: 0%; height: 100%; background: linear-gradient(90deg, var(--primary), var(--accent)); transition: 0.8s; }
 
-        .widget-card {
-            background: var(--glass); padding: 20px; border-radius: 25px;
-            margin-bottom: 15px; border: 1px solid white; text-align: center;
-        }
-
-        .water-grid { display: flex; justify-content: space-around; margin-top: 15px; background: rgba(112, 161, 255, 0.1); padding: 10px; border-radius: 15px; }
-        .glass-icon { font-size: 1.5rem; cursor: pointer; transition: 0.3s; filter: grayscale(1); }
+        .widget-card { background: var(--glass); padding: 20px; border-radius: 25px; margin-bottom: 15px; border: 1px solid white; text-align: center; }
+        
+        /* Water Bar */
+        .water-progress { height: 6px; background: #eee; border-radius: 10px; margin: 10px 0; overflow: hidden; }
+        #water-fill { height: 100%; width: 0%; background: var(--water); transition: 0.5s; }
+        
+        .water-grid { display: flex; justify-content: space-around; margin-top: 10px; background: rgba(112, 161, 255, 0.1); padding: 10px; border-radius: 15px; }
+        .glass-icon { font-size: 1.5rem; cursor: pointer; filter: grayscale(1); }
         .glass-icon.drank { filter: grayscale(0); transform: scale(1.2); }
+
+        .month-card { background: #2d3436; color: white; padding: 20px; border-radius: 25px; margin-bottom: 25px; }
+        .month-title { font-weight: 700; font-size: 0.9rem; margin-bottom: 15px; display: block; text-align: center; }
+        .weeks-row { display: flex; justify-content: space-between; }
+        .week-dot { width: 50px; text-align: center; font-size: 0.6rem; opacity: 0.5; }
+        .week-dot.active { opacity: 1; color: var(--accent); font-weight: 800; }
+        .star { font-size: 1.2rem; display: block; margin-bottom: 5px; filter: grayscale(1); }
+        .week-dot.active .star { filter: grayscale(0); }
+
+        .exp-card { background: var(--glass); padding: 20px; border-radius: 25px; margin-bottom: 20px; border: 1px solid white; }
+        .exp-item { display: flex; justify-content: space-between; font-size: 0.75rem; margin-top: 10px; opacity: 0.8; font-weight: 600; }
 
         .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
         .stat-card { background: var(--glass); padding: 15px; border-radius: 22px; text-align: center; border: 1px solid white; }
@@ -60,60 +93,70 @@
 
         .section-tag { font-weight: 800; font-size: 0.75rem; color: #7f8c8d; margin: 20px 0 10px 10px; display: block; }
         .card { background: var(--glass); border-radius: 28px; padding: 22px; margin-bottom: 18px; border: 1px solid white; }
-        .day-header { font-weight: 800; font-size: 1.1rem; color: var(--dark); margin-bottom: 15px; display: block; }
-
-        ul { list-style: none; padding: 0; margin: 0; }
-        li {
-            padding: 14px 18px; margin-bottom: 10px; border-radius: 18px;
-            background: white; cursor: pointer; transition: 0.2s; border: 1px solid #f0f0f0;
-        }
-        .item-row { display: flex; align-items: center; justify-content: space-between; }
-        .task-info { display: flex; align-items: center; }
-        .checkbox { width: 22px; height: 22px; border: 2px solid #ddd; border-radius: 8px; margin-right: 15px; flex-shrink: 0; }
         
-        li.checked { background: #f0f3ff; border-color: var(--primary); }
-        li.checked .checkbox { background: var(--primary); border-color: var(--primary); }
-        li.checked .checkbox::after { content: '✓'; color: white; display: block; text-align: center; font-size: 14px; line-height: 20px; }
+        li { padding: 14px 18px; margin-bottom: 10px; border-radius: 18px; background: white; cursor: pointer; border: 1px solid #f0f0f0; color: #2d3436; list-style: none; position: relative; }
+        li.checked { background: #f0f3ff; border-color: var(--primary); opacity: 0.8; }
         li.checked span { text-decoration: line-through; color: #b2bec3; }
+        .checkbox { width: 22px; height: 22px; border: 2px solid #ddd; border-radius: 8px; margin-right: 15px; flex-shrink: 0; }
+        li.checked .checkbox { background: var(--primary); border-color: var(--primary); position: relative; }
+        li.checked .checkbox::after { content: '✓'; color: white; display: block; text-align: center; font-size: 14px; line-height: 20px; }
 
-        .note { font-size: 0.7rem; color: #95a5a6; margin-left: 37px; margin-top: 4px; display: block; }
         .special { color: #eb4d4b; font-weight: 700; }
         .abib-special { color: #2ecc71; font-weight: 800; }
+        .note { font-size: 0.7rem; color: #95a5a6; margin-left: 37px; display: block; }
 
-        .btn-diary { background: none; border: 1px solid #eee; border-radius: 50%; width: 30px; height: 30px; cursor: pointer; font-size: 0.8rem; }
-        
-        .btn-reset {
-            width: 100%; padding: 20px; border-radius: 25px; border: none;
-            background: var(--dark); color: white; font-weight: 800; margin: 40px 0;
-            cursor: pointer; box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-        }
+        .btn-reset { width: 100%; padding: 20px; border-radius: 25px; border: none; background: #2d3436; color: white; font-weight: 800; margin: 40px 0; cursor: pointer; }
     </style>
 </head>
 <body>
 
+<button class="dark-toggle" onclick="document.body.classList.toggle('dark-mode')">🌓</button>
+
 <div class="container">
     <header>
-        <div id="current-time">Selasa, 21 Desember</div>
+        <div id="current-time">Loading...</div>
         <div id="greeting">Halo, Naila! ✨</div>
-        <h1>Ultimate Glow Planner</h1>
+        <h1>Glow Up Planner</h1>
         <div class="progress-box">
             <div class="progress-bg"><div id="progress-bar"></div></div>
-            <div style="font-size: 0.75rem; margin-top: 10px; font-weight: 800;">Hari ini: <span id="progress-percent">0%</span> Selesai</div>
+            <div style="font-size: 0.75rem; margin-top: 10px; font-weight: 800;">Progress: <span id="progress-percent">0%</span></div>
         </div>
     </header>
 
-    <div class="widget-card">
-        <span class="stat-label">💧 Water Intake (Goal: 8 Gelas)</span>
-        <div class="water-grid" id="water-tracker">
-            <span class="glass-icon" onclick="toggleWater(1)">🥛</span>
-            <span class="glass-icon" onclick="toggleWater(2)">🥛</span>
-            <span class="glass-icon" onclick="toggleWater(3)">🥛</span>
-            <span class="glass-icon" onclick="toggleWater(4)">🥛</span>
-            <span class="glass-icon" onclick="toggleWater(5)">🥛</span>
-            <span class="glass-icon" onclick="toggleWater(6)">🥛</span>
-            <span class="glass-icon" onclick="toggleWater(7)">🥛</span>
-            <span class="glass-icon" onclick="toggleWater(8)">🥛</span>
+    <div class="smart-row">
+        <div class="info-box" id="weather-tip">
+            <b>Weather Tip ☀️</b>
+            <span>Lagi cerah! Jangan lupa sunscreen ya Naila.</span>
         </div>
+        <div class="info-box" id="next-step-box">
+            <b>Next Step ⏭️</b>
+            <span id="next-step-text">Cleanser</span>
+        </div>
+    </div>
+
+    <div class="widget-card">
+        <span class="stat-label">💧 Water Intake</span>
+        <div class="water-progress"><div id="water-fill"></div></div>
+        <div class="water-grid">
+            <span class="glass-icon" onclick="drink(1)">🥛</span><span class="glass-icon" onclick="drink(2)">🥛</span><span class="glass-icon" onclick="drink(3)">🥛</span><span class="glass-icon" onclick="drink(4)">🥛</span>
+            <span class="glass-icon" onclick="drink(5)">🥛</span><span class="glass-icon" onclick="drink(6)">🥛</span><span class="glass-icon" onclick="drink(7)">🥛</span><span class="glass-icon" onclick="drink(8)">🥛</span>
+        </div>
+    </div>
+
+    <div class="month-card">
+        <span class="month-title">Pencapaian Sebulan 🌙</span>
+        <div class="weeks-row">
+            <div class="week-dot" id="w1"><span class="star">⭐</span>MGG 1</div>
+            <div class="week-dot" id="w2"><span class="star">⭐</span>MGG 2</div>
+            <div class="week-dot" id="w3"><span class="star">⭐</span>MGG 3</div>
+            <div class="week-dot" id="w4"><span class="star">⭐</span>MGG 4</div>
+        </div>
+    </div>
+
+    <div class="exp-card">
+        <span class="stat-label">⏳ PAO TRACKER</span>
+        <div class="exp-item"><span>Abib Collagen Eye Patch</span> <span style="color:var(--primary)">55 Hari Lagi</span></div>
+        <div class="exp-item"><span>Serum Vitamin C</span> <span style="color:var(--accent)">20 Hari Lagi</span></div>
     </div>
 
     <div class="stats-grid">
@@ -129,20 +172,19 @@
 
     <span class="section-tag">☀️ MORNING ROUTINE</span>
     <div class="card">
-        <span class="day-header">Daily Pagi</span>
         <ul id="am-list">
-            <li class="task" data-id="am-1"><div class="item-row"><div class="task-info"><div class="checkbox"></div><span>Cleanser</span></div></div></li>
-            <li class="task" data-id="am-2"><div class="item-row"><div class="task-info"><div class="checkbox"></div><span>Toner</span></div></div></li>
-            <li class="task" data-id="am-3"><div class="item-row"><div class="task-info"><div class="checkbox"></div><span class="special">Vitamin C Serum</span></div></div></li>
-            <li class="task" data-id="am-4"><div class="item-row"><div class="task-info"><div class="checkbox"></div><span>Moisturizer</span></div></div></li>
-            <li class="task" data-id="am-5"><div class="item-row"><div class="task-info"><div class="checkbox"></div><span>Sunscreen ☀️</span></div></div></li>
+            <li class="task" data-id="am-1" onclick="showLibrary('Cleanser')"><div style="display:flex; align-items:center;"><div class="checkbox"></div><span>Cleanser</span></div></li>
+            <li class="task" data-id="am-2" onclick="showLibrary('Toner')"><div style="display:flex; align-items:center;"><div class="checkbox"></div><span>Toner</span></div></li>
+            <li class="task" data-id="am-3" onclick="showLibrary('Vitamin C')"><div style="display:flex; align-items:center;"><div class="checkbox"></div><span class="special">Vitamin C Serum</span></div></li>
+            <li class="task" data-id="am-4" onclick="showLibrary('Moisturizer')"><div style="display:flex; align-items:center;"><div class="checkbox"></div><span>Moisturizer</span></div></li>
+            <li class="task" data-id="am-5" onclick="showLibrary('Sunscreen')"><div style="display:flex; align-items:center;"><div class="checkbox"></div><span>Sunscreen ☀️</span></div></li>
         </ul>
     </div>
 
     <span class="section-tag">🌙 NIGHT ROUTINE</span>
     <div id="night-cards"></div>
 
-    <button class="btn-reset" onclick="resetApp()">Reset Progres & Mulai Hari Baru</button>
+    <button class="btn-reset" onclick="resetApp()">Mulai Hari Baru ✨</button>
 </div>
 
 <script>
@@ -156,42 +198,82 @@
         { d: "MINGGU", items: ["Micellar", "Cleanser", {n: "Exfoliasi", s:1}, "Toner calming", {n: "5X Ceramide Serum", s:1}, "Moisturizer"] }
     ];
 
-    function updateClock() {
-        const now = new Date();
-        const options = { weekday: 'long', day: 'numeric', month: 'long' };
-        document.getElementById('current-time').innerText = now.toLocaleDateString('id-ID', options);
-        
-        const hour = now.getHours();
-        const g = document.getElementById('greeting');
-        if(hour < 12) g.innerText = "Selamat Pagi, Naila! ✨";
-        else if(hour < 18) g.innerText = "Selamat Siang, Naila! ☀️";
-        else g.innerText = "Selamat Malam, Naila! 🌙";
-    }
+    const library = {
+        'Cleanser': 'Mengangkat kotoran dan minyak tanpa merusak barrier kulit.',
+        'Toner': 'Menyeimbangkan pH kulit dan mempersiapkan kulit untuk produk selanjutnya.',
+        'Vitamin C': 'Antioksidan kuat untuk mencerahkan dan melindungi dari polusi.',
+        'Sunscreen': 'Perlindungan wajib dari sinar UV agar tidak cepat tua dan kusam.',
+        'BHA': 'Masuk ke pori-pori untuk membersihkan komedo dan jerawat.',
+        'Ceramide': 'Memperbaiki tekstur dan mengunci kelembapan (Skin Barrier Hero).',
+        'Abib': 'Kolagen intensif untuk area mata, mengurangi mata panda & garis halus.'
+    };
 
-    function toggleWater(num) {
-        const glasses = document.querySelectorAll('.glass-icon');
-        for(let i=0; i<8; i++) {
-            if(i < num) {
-                glasses[i].classList.add('drank');
-                localStorage.setItem('water-'+(i+1), 'done');
-            } else {
-                glasses[i].classList.remove('drank');
-                localStorage.removeItem('water-'+(i+1));
+    function showLibrary(key) {
+        // Find matching key
+        for (let item in library) {
+            if (key.includes(item)) {
+                alert(`${item}: ${library[item]}`);
+                return;
             }
         }
     }
 
+    function updateClock() {
+        const now = new Date();
+        document.getElementById('current-time').innerText = now.toLocaleDateString('id-ID', { weekday: 'long', day: 'numeric', month: 'long' });
+        const h = now.getHours();
+        const g = document.getElementById('greeting');
+        if(h < 12) g.innerText = "Selamat Pagi, Naila! ✨";
+        else if(h < 18) g.innerText = "Selamat Siang, Naila! ☀️";
+        else g.innerText = "Selamat Malam, Naila! 🌙";
+        
+        if(h >= 18) document.body.classList.add('dark-mode');
+
+        // Simple Weather Simulation
+        const tips = h < 18 ? "UV tinggi Naila! Sunscreen wajib ya." : "Udara dingin malam, pakai Moisturizer lebih tebal.";
+        document.querySelector('#weather-tip span').innerText = tips;
+    }
+
+    function drink(n) {
+        const glasses = document.querySelectorAll('.glass-icon');
+        let drankCount = 0;
+        for(let i=0; i<8; i++) {
+            if(i < n) { 
+                glasses[i].classList.add('drank'); 
+                localStorage.setItem('w-'+i, 'done');
+                drankCount++;
+            } else { 
+                glasses[i].classList.remove('drank'); 
+                localStorage.removeItem('w-'+i); 
+            }
+        }
+        document.getElementById('water-fill').style.width = (drankCount/8)*100 + '%';
+    }
+
     function updateStats() {
         const all = document.querySelectorAll('.task').length;
-        const done = document.querySelectorAll('.task.checked').length;
-        const percent = Math.round((done / all) * 100);
+        const doneList = document.querySelectorAll('.task.checked');
+        const done = doneList.length;
+        const pct = Math.round((done / all) * 100);
+        document.getElementById('progress-bar').style.width = pct + '%';
+        document.getElementById('progress-percent').innerText = pct + '%';
         
-        document.getElementById('progress-bar').style.width = percent + '%';
-        document.getElementById('progress-percent').innerText = percent + '%';
+        // Next Step Logic
+        const nextTask = document.querySelector('.task:not(.checked)');
+        document.getElementById('next-step-text').innerText = nextTask ? nextTask.innerText : "Glow Up Complete! ✨";
 
-        if(percent === 100) {
-            confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 }, colors: ['#8e94f2', '#ff9a9e', '#70a1ff'] });
+        // Night Aesthetic
+        if(pct === 100) {
+            document.body.classList.add('all-done');
+            confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
+        } else {
+            document.body.classList.remove('all-done');
         }
+
+        if (pct > 25) document.getElementById('w1').classList.add('active');
+        if (pct > 50) document.getElementById('w2').classList.add('active');
+        if (pct > 75) document.getElementById('w3').classList.add('active');
+        if (pct === 100) document.getElementById('w4').classList.add('active');
     }
 
     const nightContainer = document.getElementById('night-cards');
@@ -202,15 +284,12 @@
             const name = typeof it === 'string' ? it : it.n;
             const isSp = it.s === 1 ? 'special' : (it.s === 2 ? 'abib-special' : '');
             const note = it.c ? `<span class="note">${it.c}</span>` : '';
-            return `<li class="task" data-id="final-${dIdx}-${iIdx}">
-                        <div class="item-row">
-                            <div class="task-info"><div class="checkbox"></div><span class="${isSp}">${name}</span></div>
-                            <button class="btn-diary" onclick="event.stopPropagation(); alert('Catatan hari ${day.d}: Bagaimana kondisi kulitmu hari ini?')">📝</button>
-                        </div>
+            return `<li class="task" data-id="v-final-${dIdx}-${iIdx}" onclick="showLibrary('${name}')">
+                        <div style="display:flex; align-items:center;"><div class="checkbox"></div><span class="${isSp}">${name}</span></div>
                         ${note}
                     </li>`;
         }).join('');
-        card.innerHTML = `<span class="day-header">${day.d}</span><ul>${itemsHtml}</ul>`;
+        card.innerHTML = `<span style="font-weight:800; display:block; margin-bottom:15px;">${day.d}</span><ul>${itemsHtml}</ul>`;
         nightContainer.appendChild(card);
     });
 
@@ -228,25 +307,29 @@
         document.querySelectorAll('.task').forEach(li => {
             if (localStorage.getItem(li.getAttribute('data-id')) === 'done') li.classList.add('checked');
         });
-        for(let i=1; i<=8; i++) {
-            if(localStorage.getItem('water-'+i) === 'done') document.querySelectorAll('.glass-icon')[i-1].classList.add('drank');
+        let drank = 0;
+        for(let i=0; i<8; i++) {
+            if(localStorage.getItem('w-'+i) === 'done') {
+                document.querySelectorAll('.glass-icon')[i].classList.add('drank');
+                drank++;
+            }
         }
+        document.getElementById('water-fill').style.width = (drank/8)*100 + '%';
         document.getElementById('streak-count').innerText = localStorage.getItem('naila_streak') || 0;
         document.getElementById('total-done').innerText = localStorage.getItem('total_glow_all') || 0;
         updateStats();
     };
 
     function resetApp() {
-        if(confirm('Naila, mau simpan progres hari ini dan mulai hari baru?')) {
-            let done = document.querySelectorAll('.task.checked').length;
+        if(confirm('Mulai hari baru? Progres akan disimpan ke streak!')) {
+            let doneCount = document.querySelectorAll('.task.checked').length;
             let total = parseInt(localStorage.getItem('total_glow_all') || 0);
-            localStorage.setItem('total_glow_all', total + done);
-            
+            localStorage.setItem('total_glow_all', total + doneCount);
             let streak = parseInt(localStorage.getItem('naila_streak') || 0);
             localStorage.setItem('naila_streak', streak + 1);
-
+            
             document.querySelectorAll('.task').forEach(t => localStorage.removeItem(t.getAttribute('data-id')));
-            for(let i=1; i<=8; i++) localStorage.removeItem('water-'+i);
+            for(let i=0; i<8; i++) localStorage.removeItem('w-'+i);
             location.reload();
         }
     }
