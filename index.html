@@ -108,6 +108,8 @@
 
         .note { font-size: 0.7rem; color: #95a5a6; margin-left: 32px; display: block; }
         .special { color: #eb4d4b; font-weight: 600; }
+        /* Warna khusus untuk produk baru Naila */
+        .abib-special { color: #2ecc71; font-weight: 700; }
 
         .btn-reset {
             width: 100%; padding: 18px; border-radius: 20px; border: none;
@@ -178,13 +180,13 @@
 </div>
 
 <script>
-    // Jadwal yang diperbarui sesuai anjuran kedokteran kulit (Medical-Friendly)
+    // Jadwal Updated: Menambahkan Abib Collagen Eye Patch pada hari Senin, Rabu, Jumat
     const schedule = [
-        { d: "SENIN", items: ["Micellar", "Cleanser", "Toner", {n: "Serum BHA 2%", s:1}, {n: "5X Ceramide Serum", s:1}, "Moisturizer"] },
+        { d: "SENIN", items: ["Micellar", "Cleanser", "Toner", {n: "Abib Collagen Eye Patch 🌿", s:2, c: "Tempel 15-20 mnt"}, {n: "Serum BHA 2%", s:1}, {n: "5X Ceramide Serum", s:1}, "Moisturizer"] },
         { d: "SELASA", items: ["Micellar", "Cleanser", "Toner", {n: "5X Ceramide Serum", s:1}, "Moisturizer", {n: "Acne spot", s:1, c: "Tunggu kering"}] },
-        { d: "RABU", items: ["Micellar", "Cleanser", {n: "Exfoliasi", s:1, c: "1-5 Menit"}, "Toner calming", {n: "5X Ceramide Serum", s:1}, "Moisturizer"] },
+        { d: "RABU", items: ["Micellar", "Cleanser", {n: "Exfoliasi", s:1, c: "1-5 Menit"}, "Toner calming", {n: "Abib Collagen Eye Patch 🌿", s:2, c: "Deep Hydration"}, {n: "5X Ceramide Serum", s:1}, "Moisturizer"] },
         { d: "KAMIS", items: ["Micellar", "Cleanser", "Toner", {n: "Serum BHA 2%", s:1}, {n: "5X Ceramide Serum", s:1}, "Moisturizer"] },
-        { d: "JUMAT", items: ["Micellar", "Cleanser", {n: "Masker", s:1, c: "10-15 Menit"}, "Toner", {n: "5X Ceramide Serum", s:1}, "Moisturizer"] },
+        { d: "JUMAT", items: ["Micellar", "Cleanser", {n: "Masker Wajah", s:1, c: "10-15 Menit"}, {n: "Abib Collagen Eye Patch 🌿", s:2, c: "Barengan Masker"}, "Toner", {n: "5X Ceramide Serum", s:1}, "Moisturizer"] },
         { d: "SABTU", items: ["Micellar", "Cleanser", "Toner", {n: "5X Ceramide Serum", s:1}, "Moisturizer", {n: "Acne spot", s:1, c: "Tunggu kering"}] },
         { d: "MINGGU", items: ["Micellar", "Cleanser", {n: "Exfoliasi", s:1, c: "1-5 Menit"}, "Toner calming", {n: "5X Ceramide Serum", s:1}, "Moisturizer"] }
     ];
@@ -195,9 +197,10 @@
         card.className = 'card';
         let itemsHtml = day.items.map((it, iIdx) => {
             const name = typeof it === 'string' ? it : it.n;
-            const isSp = it.s ? 'special' : '';
+            // s:1 = merah (special), s:2 = hijau (abib)
+            const isSp = it.s === 1 ? 'special' : (it.s === 2 ? 'abib-special' : '');
             const note = it.c ? `<span class="note">${it.c}</span>` : '';
-            return `<li class="task" data-id="v7-${dIdx}-${iIdx}">
+            return `<li class="task" data-id="v8-${dIdx}-${iIdx}">
                         <div class="item-row"><div class="checkbox"></div><span class="${isSp}">${name}</span></div>
                         ${note}
                     </li>`;
