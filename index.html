@@ -65,6 +65,10 @@
         .exp-ok { background: #55efc4; color: #00b894; }
         .del-btn { color: #ff7675; cursor: pointer; font-weight: 800; }
 
+        /* PERIOD SPECIAL BOX */
+        .period-box { background: #fff5f5; border: 1px solid #ffcccc; }
+        .period-status { font-size: 0.75rem; color: #ff7675; font-weight: 700; margin-top: 5px; display: block; }
+
         /* CHECKLIST */
         .section-tag { font-weight: 800; font-size: 0.75rem; color: #7f8c8d; margin: 20px 0 10px 10px; display: block; }
         .card { background: var(--glass); border-radius: 28px; padding: 20px; margin-bottom: 18px; border: 1px solid white; }
@@ -120,6 +124,12 @@
             <button onclick="setSkin('Dry')" style="padding:8px; border-radius:10px; border:1px solid #ddd; font-size:0.65rem; cursor:pointer; background:white;">Kering</button>
             <button onclick="setSkin('Healthy')" style="padding:8px; border-radius:10px; border:1px solid #ddd; font-size:0.65rem; cursor:pointer; background:white;">Sehat</button>
         </div>
+    </div>
+
+    <div class="widget-card period-box" style="text-align: center;">
+        <b style="color: #ff7675; font-size: 0.8rem;">🌸 PERIOD TRACKER</b>
+        <input type="date" id="period-date" onchange="updatePeriod()" style="margin-top:10px; border-color: #ffcccc;">
+        <span id="period-info" class="period-status">Kapan hari pertama haid terakhirmu?</span>
     </div>
 
     <div class="widget-card">
@@ -184,7 +194,21 @@
         document.getElementById('skin-advice').innerText = advice;
     }
 
-    // INVENTORY & EXPIRED
+    function updatePeriod() {
+        const val = document.getElementById('period-date').value;
+        if(!val) return;
+        const last = new Date(val);
+        const diff = Math.floor((new Date() - last) / (1000*60*60*24));
+        let msg = "";
+        if(diff <= 5) msg = "Fase Menstruasi: Fokus hidrasi & istirahat.";
+        else if(diff <= 14) msg = "Fase Folikular: Kulit sedang cerah-cerahnya!";
+        else if(diff <= 28) msg = "Fase Luteal: Waspada jerawat hormon.";
+        else msg = "Siklus baru segera mulai.";
+        document.getElementById('period-info').innerText = msg;
+        localStorage.setItem('naila_period', val);
+    }
+
+    // INVENTORY
     function addInventory() {
         const name = document.getElementById('exp-prod-name').value;
         const date = document.getElementById('exp-prod-date').value;
@@ -277,7 +301,7 @@
             const note = it.c ? `<span class="note">${it.c}</span>` : '';
             return `<li class="task" data-id="task-${dIdx}-${iIdx}"><div class="checkbox"></div><span>${name}</span></li>${note}`;
         }).join('');
-        card.innerHTML = `<span style="font-weight:800; display:block; margin-bottom:15px;">${day.d}</span><ul>${itemsHtml}</ul>`;
+        card.innerHTML = `<span style="font-weight:800; display:block; margin-bottom:15px; color:var(--primary);">${day.d}</span><ul>${itemsHtml}</ul>`;
         nightContainer.appendChild(card);
     });
 
@@ -292,6 +316,10 @@
 
     window.onload = () => {
         renderBudget(); renderInventory();
+        if(localStorage.getItem('naila_period')) {
+            document.getElementById('period-date').value = localStorage.getItem('naila_period');
+            updatePeriod();
+        }
         document.querySelectorAll('.task').forEach(li => {
             if (localStorage.getItem(li.getAttribute('data-id')) === 'done') li.classList.add('checked');
         });
