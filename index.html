@@ -23,7 +23,7 @@
             background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
         }
 
-        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; scroll-behavior: smooth; transition: 0.3s; }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; transition: 0.3s; }
 
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
@@ -36,13 +36,12 @@
         .container { max-width: 480px; width: 100%; }
 
         header {
-            text-align: center; padding: 35px 20px; background: var(--glass);
+            text-align: center; padding: 30px 20px; background: var(--glass);
             backdrop-filter: blur(20px); border-radius: 35px; margin-bottom: 20px;
             box-shadow: 0 15px 35px rgba(0,0,0,0.05); border: 1px solid white;
         }
 
-        #current-time { font-size: 0.75rem; font-weight: 700; color: #95a5a6; margin-bottom: 5px; }
-        #greeting { font-size: 1rem; font-weight: 800; color: var(--primary); margin-bottom: 5px; }
+        #greeting { font-size: 1.1rem; font-weight: 800; color: var(--primary); margin-bottom: 5px; }
         header h1 { font-weight: 800; font-size: 1.8rem; margin: 0; color: var(--primary); }
 
         .dark-toggle { position: fixed; top: 20px; right: 20px; z-index: 1000; cursor: pointer; font-size: 1.5rem; background: none; border: none; }
@@ -55,41 +54,37 @@
         .progress-bg { background: #eee; height: 12px; border-radius: 10px; overflow: hidden; }
         #progress-bar { width: 0%; height: 100%; background: var(--primary); transition: 0.8s; }
 
-        .widget-card { background: var(--glass); padding: 20px; border-radius: 25px; margin-bottom: 15px; border: 1px solid white; text-align: center; }
+        /* CARDS */
+        .widget-card { background: var(--glass); padding: 20px; border-radius: 25px; margin-bottom: 15px; border: 1px solid white; }
+        input { padding: 10px; border-radius: 12px; border: 1px solid #ddd; font-family: inherit; font-size: 0.75rem; width: 100%; margin-bottom: 8px; }
+        .btn-add { background: var(--primary); color: white; border: none; padding: 12px; border-radius: 12px; font-weight: bold; cursor: pointer; width: 100%; }
         
+        .list-item { background: white; padding: 12px; border-radius: 15px; margin-top: 8px; font-size: 0.75rem; border: 1px solid #f0f0f0; display: flex; justify-content: space-between; align-items: center; }
+        .exp-tag { font-size: 0.6rem; font-weight: 800; padding: 2px 6px; border-radius: 5px; margin-top: 4px; display: inline-block; }
+        .exp-alert { background: #ff7675; color: white; }
+        .exp-ok { background: #55efc4; color: #00b894; }
+        .del-btn { color: #ff7675; cursor: pointer; font-weight: 800; }
+
+        /* CHECKLIST */
+        .section-tag { font-weight: 800; font-size: 0.75rem; color: #7f8c8d; margin: 20px 0 10px 10px; display: block; }
+        .card { background: var(--glass); border-radius: 28px; padding: 20px; margin-bottom: 18px; border: 1px solid white; }
+        li { padding: 15px; margin-bottom: 10px; border-radius: 18px; background: white; cursor: pointer; border: 1px solid #f0f0f0; display: flex; align-items: center; list-style: none; }
+        li.checked { background: #f0f3ff; opacity: 0.8; }
+        li.checked span { text-decoration: line-through; color: #b2bec3; }
+        .checkbox { width: 22px; height: 22px; border: 2px solid #ddd; border-radius: 8px; margin-right: 15px; flex-shrink: 0; position: relative;}
+        li.checked .checkbox { background: var(--primary); border-color: var(--primary); }
+        li.checked .checkbox::after { content: '✓'; color: white; position: absolute; left: 4px; top: -2px; }
+
+        /* WATER INTAKE */
         .water-progress { height: 6px; background: #eee; border-radius: 10px; margin: 10px 0; overflow: hidden; }
         #water-fill { height: 100%; width: 0%; background: var(--water); transition: 0.5s; }
-        
         .water-grid { display: flex; justify-content: space-around; margin-top: 10px; background: rgba(112, 161, 255, 0.1); padding: 10px; border-radius: 15px; }
         .glass-icon { font-size: 1.5rem; cursor: pointer; filter: grayscale(1); }
         .glass-icon.drank { filter: grayscale(0); transform: scale(1.2); }
 
-        /* Period & Skin Quiz Styles */
-        .quiz-btn-row { display: flex; gap: 5px; justify-content: center; margin-top: 10px; }
-        .quiz-btn { border: 1px solid #ddd; background: white; padding: 8px; border-radius: 10px; font-size: 0.65rem; cursor: pointer; }
-        .quiz-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
-        .period-card { background: #fff5f5; border: 1px solid #ffcccc; border-radius: 25px; padding: 20px; margin-bottom: 20px; text-align: center; color: #ff7675; }
-
-        /* Budget Tracker Style */
-        .budget-card { background: var(--glass); border-radius: 25px; padding: 20px; margin-bottom: 20px; border: 1px solid white; }
-        input { padding: 8px 12px; border-radius: 10px; border: 1px solid #ddd; font-family: inherit; font-size: 0.75rem; width: 100%; margin-bottom: 8px; }
-        .btn-add { background: var(--primary); color: white; border: none; padding: 10px; border-radius: 12px; font-weight: bold; cursor: pointer; width: 100%; }
-        .budget-item { display: flex; justify-content: space-between; background: white; padding: 10px; border-radius: 12px; margin-top: 8px; font-size: 0.75rem; border: 1px solid #f0f0f0; }
-        .del-btn { color: #eb4d4b; cursor: pointer; font-weight: bold; }
-
-        .section-tag { font-weight: 800; font-size: 0.75rem; color: #7f8c8d; margin: 20px 0 10px 10px; display: block; }
-        .card { background: var(--glass); border-radius: 28px; padding: 22px; margin-bottom: 18px; border: 1px solid white; }
-        
-        li { padding: 14px 18px; margin-bottom: 10px; border-radius: 18px; background: white; cursor: pointer; border: 1px solid #f0f0f0; display: flex; align-items: center; }
-        li.checked { background: #f0f3ff; border-color: var(--primary); opacity: 0.8; }
-        li.checked span { text-decoration: line-through; color: #b2bec3; }
-        .checkbox { width: 22px; height: 22px; border: 2px solid #ddd; border-radius: 8px; margin-right: 15px; flex-shrink: 0; }
-        li.checked .checkbox { background: var(--primary); border-color: var(--primary); }
-        li.checked .checkbox::after { content: '✓'; color: white; display: block; text-align: center; font-size: 14px; }
-
         .special { color: #eb4d4b; font-weight: 700; }
         .abib-special { color: #2ecc71; font-weight: 800; }
-        .note { font-size: 0.7rem; color: #95a5a6; display: block; margin-left: 37px; margin-top: -15px; margin-bottom: 10px; }
+        .note { font-size: 0.7rem; color: #95a5a6; display: block; margin-left: 37px; margin-top: -12px; margin-bottom: 10px; }
         .btn-reset { width: 100%; padding: 20px; border-radius: 25px; border: none; background: #2d3436; color: white; font-weight: 800; margin: 40px 0; cursor: pointer; }
     </style>
 </head>
@@ -99,7 +94,6 @@
 
 <div class="container">
     <header>
-        <div id="current-time">Loading...</div>
         <div id="greeting">Halo, Naila! ✨</div>
         <h1>Glow Up Planner</h1>
         <div class="progress-box">
@@ -110,8 +104,8 @@
 
     <div class="smart-row">
         <div class="info-box">
-            <b>Weather & Skin ☀️</b>
-            <span id="skin-advice">Pilih kondisi kulitmu hari ini.</span>
+            <b>Skin Condition ☀️</b>
+            <span id="skin-advice">Pilih kondisi kulitmu.</span>
         </div>
         <div class="info-box">
             <b>Next Step ⏭️</b>
@@ -119,33 +113,36 @@
         </div>
     </div>
 
-    <div class="widget-card">
-        <span class="stat-label" style="font-size: 0.7rem;">Gimana kondisi kulitmu, Naila?</span>
-        <div class="quiz-btn-row">
-            <button class="quiz-btn" onclick="setSkin('Oily')">Berminyak</button>
-            <button class="quiz-btn" onclick="setSkin('Dry')">Kering</button>
-            <button class="quiz-btn" onclick="setSkin('Acne')">Jerawatan</button>
-            <button class="quiz-btn" onclick="setSkin('Healthy')">Sehat</button>
+    <div class="widget-card" style="text-align: center;">
+        <span class="stat-label" style="font-size: 0.7rem;">Kondisi kulit harian:</span>
+        <div style="display:flex; gap:5px; justify-content:center; margin-top:10px;">
+            <button onclick="setSkin('Oily')" style="padding:8px; border-radius:10px; border:1px solid #ddd; font-size:0.65rem; cursor:pointer; background:white;">Berminyak</button>
+            <button onclick="setSkin('Dry')" style="padding:8px; border-radius:10px; border:1px solid #ddd; font-size:0.65rem; cursor:pointer; background:white;">Kering</button>
+            <button onclick="setSkin('Healthy')" style="padding:8px; border-radius:10px; border:1px solid #ddd; font-size:0.65rem; cursor:pointer; background:white;">Sehat</button>
         </div>
     </div>
 
-    <div class="period-card">
-        <b style="font-size: 0.8rem;">🌸 Period Tracker</b><br>
-        <span id="period-status" style="font-size: 0.7rem;">Kapan hari pertama haidmu?</span><br>
-        <input type="date" id="period-date" onchange="updatePeriod()" style="width: auto; margin-top: 10px;">
+    <div class="widget-card">
+        <span class="stat-label" style="font-weight:800; color:var(--accent);">📅 PRODUCT INVENTORY</span>
+        <div style="margin-top:10px;">
+            <input type="text" id="exp-prod-name" placeholder="Nama Produk (Mis: Toner)">
+            <input type="date" id="exp-prod-date">
+            <button class="btn-add" style="background:var(--accent);" onclick="addInventory()">Simpan Tanggal Exp</button>
+        </div>
+        <div id="inventory-list"></div>
     </div>
 
-    <div class="budget-card">
-        <span class="stat-label">🛒 SKINCARE BUDGET</span>
+    <div class="widget-card">
+        <span class="stat-label" style="font-weight:800; color:var(--primary);">🛒 BUDGET TRACKER</span>
         <div style="margin-top:10px;">
-            <input type="text" id="prod-name" placeholder="Nama Produk">
-            <input type="number" id="prod-price" placeholder="Harga (Rp)">
+            <input type="text" id="bud-prod-name" placeholder="Nama Produk">
+            <input type="number" id="bud-prod-price" placeholder="Harga (Rp)">
             <button class="btn-add" onclick="addBudget()">Simpan ke Budget</button>
         </div>
         <div id="budget-list"></div>
     </div>
 
-    <div class="widget-card">
+    <div class="widget-card" style="text-align:center;">
         <span class="stat-label">💧 Water Intake</span>
         <div class="water-progress"><div id="water-fill"></div></div>
         <div class="water-grid">
@@ -157,21 +154,11 @@
     <span class="section-tag">☀️ MORNING ROUTINE</span>
     <div class="card">
         <ul id="am-list">
-            <li class="task" data-id="am-1">
-                <div class="checkbox"></div><span>Cleanser</span>
-            </li>
-            <li class="task" data-id="am-2">
-                <div class="checkbox"></div><span>Toner</span>
-            </li>
-            <li class="task" data-id="am-3">
-                <div class="checkbox"></div><span class="special">Vitamin C Serum</span>
-            </li>
-            <li class="task" data-id="am-4">
-                <div class="checkbox"></div><span>Moisturizer</span>
-            </li>
-            <li class="task" data-id="am-5">
-                <div class="checkbox"></div><span>Sunscreen ☀️</span>
-            </li>
+            <li class="task" data-id="am-1"><div class="checkbox"></div><span>Cleanser</span></li>
+            <li class="task" data-id="am-2"><div class="checkbox"></div><span>Toner</span></li>
+            <li class="task" data-id="am-3"><div class="checkbox"></div><span class="special">Vitamin C Serum</span></li>
+            <li class="task" data-id="am-4"><div class="checkbox"></div><span>Moisturizer</span></li>
+            <li class="task" data-id="am-5"><div class="checkbox"></div><span>Sunscreen ☀️</span></li>
         </ul>
     </div>
 
@@ -193,64 +180,78 @@
     ];
 
     function setSkin(type) {
-        document.querySelectorAll('.quiz-btn').forEach(b => b.classList.remove('active'));
-        event.target.classList.add('active');
-        let advice = "";
-        if(type === 'Oily') advice = "Kulit berminyak? Fokus ke Double Cleansing.";
-        if(type === 'Dry') advice = "Kulit kering? Pakai Moisturizer lebih tebal.";
-        if(type === 'Acne') advice = "Lagi jerawatan? Hindari eksfoliasi keras.";
-        if(type === 'Healthy') advice = "Kulit sehat! Pertahankan ya, Naila.";
+        let advice = type === 'Oily' ? "Fokus Double Cleansing." : (type === 'Dry' ? "Pakai Moisturizer lebih." : "Kulit sehat! Mantap Naila.");
         document.getElementById('skin-advice').innerText = advice;
     }
 
-    function updatePeriod() {
-        const date = new Date(document.getElementById('period-date').value);
-        const today = new Date();
-        const diff = Math.floor((today - date) / (1000 * 60 * 60 * 24));
-        let status = "";
-        if(diff >= 0 && diff <= 5) status = "Fase Haid: Fokus hidrasi & calming.";
-        else if(diff > 5 && diff <= 14) status = "Fase Folikular: Kulit sedang glowing!";
-        else status = "Fase Luteal: Waspada jerawat hormon.";
-        document.getElementById('period-status').innerText = status;
-        localStorage.setItem('naila_period_v2', document.getElementById('period-date').value);
+    // INVENTORY & EXPIRED
+    function addInventory() {
+        const name = document.getElementById('exp-prod-name').value;
+        const date = document.getElementById('exp-prod-date').value;
+        if(!name || !date) return;
+        const data = JSON.parse(localStorage.getItem('naila_inv') || '[]');
+        data.push({ id: Date.now(), name, date });
+        localStorage.setItem('naila_inv', JSON.stringify(data));
+        document.getElementById('exp-prod-name').value = '';
+        document.getElementById('exp-prod-date').value = '';
+        renderInventory();
     }
 
+    function deleteInv(id) {
+        let data = JSON.parse(localStorage.getItem('naila_inv') || '[]');
+        data = data.filter(i => i.id !== id);
+        localStorage.setItem('naila_inv', JSON.stringify(data));
+        renderInventory();
+    }
+
+    function renderInventory() {
+        const list = document.getElementById('inventory-list');
+        const data = JSON.parse(localStorage.getItem('naila_inv') || '[]');
+        const today = new Date().toISOString().split('T')[0];
+        list.innerHTML = data.map(i => {
+            const isExp = i.date < today;
+            return `<div class="list-item">
+                <div><b>${i.name}</b><br><span class="exp-tag ${isExp ? 'exp-alert' : 'exp-ok'}">${isExp ? 'EXPIRED' : 'Exp: '+i.date}</span></div>
+                <span class="del-btn" onclick="deleteInv(${i.id})">✕</span>
+            </div>`;
+        }).join('');
+    }
+
+    // BUDGET
     function addBudget() {
-        const name = document.getElementById('prod-name').value;
-        const price = document.getElementById('prod-price').value;
+        const name = document.getElementById('bud-prod-name').value;
+        const price = document.getElementById('bud-prod-price').value;
         if(!name || !price) return;
-        const data = JSON.parse(localStorage.getItem('naila_budget_v2') || '[]');
+        const data = JSON.parse(localStorage.getItem('naila_bud_v5') || '[]');
         data.push({ id: Date.now(), name, price });
-        localStorage.setItem('naila_budget_v2', JSON.stringify(data));
-        document.getElementById('prod-name').value = '';
-        document.getElementById('prod-price').value = '';
+        localStorage.setItem('naila_bud_v5', JSON.stringify(data));
+        document.getElementById('bud-prod-name').value = '';
+        document.getElementById('bud-prod-price').value = '';
         renderBudget();
     }
 
-    function delBudget(id) {
-        let data = JSON.parse(localStorage.getItem('naila_budget_v2') || '[]');
+    function deleteBud(id) {
+        let data = JSON.parse(localStorage.getItem('naila_bud_v5') || '[]');
         data = data.filter(i => i.id !== id);
-        localStorage.setItem('naila_budget_v2', JSON.stringify(data));
+        localStorage.setItem('naila_bud_v5', JSON.stringify(data));
         renderBudget();
     }
 
     function renderBudget() {
         const list = document.getElementById('budget-list');
-        const data = JSON.parse(localStorage.getItem('naila_budget_v2') || '[]');
-        list.innerHTML = data.map(i => `
-            <div class="budget-item">
-                <span>${i.name} - Rp${parseInt(i.price).toLocaleString()}</span>
-                <span class="del-btn" onclick="delBudget(${i.id})">✕</span>
-            </div>
-        `).join('');
+        const data = JSON.parse(localStorage.getItem('naila_bud_v5') || '[]');
+        list.innerHTML = data.map(i => `<div class="list-item">
+            <span><b>${i.name}</b><br>Rp${parseInt(i.price).toLocaleString()}</span>
+            <span class="del-btn" onclick="deleteBud(${i.id})">✕</span>
+        </div>`).join('');
     }
 
     function drink(n) {
         const glasses = document.querySelectorAll('.glass-icon');
         let drank = 0;
         for(let i=0; i<8; i++) {
-            if(i < n) { glasses[i].classList.add('drank'); localStorage.setItem('water-'+i, 'done'); drank++; }
-            else { glasses[i].classList.remove('drank'); localStorage.removeItem('water-'+i); }
+            if(i < n) { glasses[i].classList.add('drank'); localStorage.setItem('w-'+i, 'done'); drank++; }
+            else { glasses[i].classList.remove('drank'); localStorage.removeItem('w-'+i); }
         }
         document.getElementById('water-fill').style.width = (drank/8)*100 + '%';
     }
@@ -263,7 +264,7 @@
         document.getElementById('progress-percent').innerText = pct + '%';
         const next = document.querySelector('.task:not(.checked)');
         document.getElementById('next-step-text').innerText = next ? next.querySelector('span').innerText : "Selesai! ✨";
-        if(pct === 100) confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+        if(pct === 100) confetti({ particleCount: 100, spread: 70 });
     }
 
     const nightContainer = document.getElementById('night-cards');
@@ -274,9 +275,7 @@
             const name = typeof it === 'string' ? it : it.n;
             const isSp = it.s === 1 ? 'special' : (it.s === 2 ? 'abib-special' : '');
             const note = it.c ? `<span class="note">${it.c}</span>` : '';
-            return `<li class="task" data-id="task-${dIdx}-${iIdx}">
-                        <div class="checkbox"></div><span class="${isSp}">${name}</span>
-                    </li>${note}`;
+            return `<li class="task" data-id="task-${dIdx}-${iIdx}"><div class="checkbox"></div><span>${name}</span></li>${note}`;
         }).join('');
         card.innerHTML = `<span style="font-weight:800; display:block; margin-bottom:15px;">${day.d}</span><ul>${itemsHtml}</ul>`;
         nightContainer.appendChild(card);
@@ -292,26 +291,16 @@
     });
 
     window.onload = () => {
-        const now = new Date();
-        document.getElementById('current-time').innerText = now.toLocaleDateString('id-ID', { weekday: 'long', day: 'numeric', month: 'long' });
-        renderBudget();
-        if(localStorage.getItem('naila_period_v2')) {
-            document.getElementById('period-date').value = localStorage.getItem('naila_period_v2');
-            updatePeriod();
-        }
+        renderBudget(); renderInventory();
         document.querySelectorAll('.task').forEach(li => {
             if (localStorage.getItem(li.getAttribute('data-id')) === 'done') li.classList.add('checked');
         });
-        let drank = 0;
-        for(let i=0; i<8; i++) if(localStorage.getItem('water-'+i) === 'done') { document.querySelectorAll('.glass-icon')[i].classList.add('drank'); drank++; }
-        document.getElementById('water-fill').style.width = (drank/8)*100 + '%';
         updateStats();
     };
 
     function resetApp() {
         if(confirm('Mulai hari baru?')) {
             document.querySelectorAll('.task').forEach(t => localStorage.removeItem(t.getAttribute('data-id')));
-            for(let i=0; i<8; i++) localStorage.removeItem('water-'+i);
             location.reload();
         }
     }
